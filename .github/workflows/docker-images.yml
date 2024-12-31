@@ -28,4 +28,4 @@ jobs:
 
 
     - name: Push the image to Docker Hub
-      run: docker push blastchaos/ai-chess
+      run: docker push blastchaos/pokemon-ai
