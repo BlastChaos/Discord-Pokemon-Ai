@@ -1,3 +1,4 @@
+import os
 import discord
 from discord.ext import commands
 import google.generativeai as genai
@@ -7,6 +8,8 @@ import io
 from math import pi
 import typing
 
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 prompt = """You are a pokedex in the real-life. What it means is that I will send you photos from real-life that can be not related to pokemon. 
 
@@ -127,7 +130,7 @@ pokemonEmojiTypes = {
 
 
 #Gemini API
-genai.configure(api_key="AIzaSyDlb8JtTZYOxua-SvXNvMAAbioJ4OVtGSw")
+genai.configure(api_key=GOOGLE_API_KEY)
 model =  genai.GenerativeModel(model_name='gemini-2.0-flash-exp', generation_config={"response_mime_type": "application/json"})
 
 intents = discord.Intents.default()
@@ -254,5 +257,4 @@ async def help(ctx: commands.Context):
 
 
 
-bot.run("MTMyMzQ2MjkyMzM1NTY4NDkzNA.GkWJIw.sQwgS2mC-pigD2V1__HDBS7opa38A5S3qMlPOI")
-
+bot.run(DISCORD_TOKEN)
