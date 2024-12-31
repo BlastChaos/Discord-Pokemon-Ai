@@ -78,6 +78,7 @@ Move {
 }
 for the moves, you can only have 4 of them. 
 You can choose moves that are already existing in the game or create new ones. Ideally, unless it's literally a pokemon from the game, you should create AT LEAST a "Signature move"  However, it must make sense with the description you gave me.
+be careful, I only want one pokemon. not multiple pokemons in one photo.
 """
 pokemonTypes = {
     0: "Normal",
@@ -100,6 +101,26 @@ pokemonTypes = {
     17: "Fairy"
 }
 
+pokemonEmojiTypes = {
+    0: "😀",
+    1: "🔥",
+    2: "💧",
+    3: "⚡️",
+    4: "🌼",
+    5: "❄️",
+    6: "💪",
+    7: "⚠️",
+    8: "⛳️",
+    9: "✈️",
+    10: "🔮",
+    11: "🕷",
+    12: "🗻",
+    13: "👻",
+    14: "🐲",
+    15: "🌑",
+    16: "🔪",
+    17: "💟"
+}
 
 
 
@@ -161,17 +182,20 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
         f"**Types:** {', '.join(pokemonTypes[int(t)] for t in types)}\n"
 
         f"## Moves\n"
-        f"1. **{moves[0]['name']}** - {pokemonTypes[int(moves[0]['type'])]} - Power: {moves[0]['power']} - Accuracy: {moves[0]['accuracy']} - PP: {moves[0]['pp']}\n"
+        f"1. **{moves[0]['name']}** - Power: {moves[0]['power']} - Accuracy: {moves[0]['accuracy']} - PP: {moves[0]['pp']}\n"
+        f"**{pokemonEmojiTypes[int(moves[0]['type'])]}{pokemonTypes[int(moves[0]['type'])]}{pokemonEmojiTypes[int(moves[0]['type'])]}**\n"
         f"{moves[0]['description']}\n\n"
         
-        f"2. **{moves[1]['name']}** - {pokemonTypes[int(moves[1]['type'])]} - Power: {moves[1]['power']} - Accuracy: {moves[1]['accuracy']} - PP: {moves[1]['pp']}\n"
+        f"2. **{moves[1]['name']}** - Power: {moves[1]['power']} - Accuracy: {moves[1]['accuracy']} - PP: {moves[1]['pp']}\n"
+        f"**{pokemonEmojiTypes[int(moves[1]['type'])]}{pokemonTypes[int(moves[1]['type'])]}{pokemonEmojiTypes[int(moves[1]['type'])]}**\n"
         f"{moves[1]['description']}\n\n"
 
-
-        f"3. **{moves[2]['name']}** - {pokemonTypes[int(moves[2]['type'])]} - Power: {moves[2]['power']} - Accuracy: {moves[2]['accuracy']} - PP: {moves[2]['pp']}\n"
+        f"3. **{moves[2]['name']}** - Power: {moves[2]['power']} - Accuracy: {moves[2]['accuracy']} - PP: {moves[2]['pp']}\n"
+        f"**{pokemonEmojiTypes[int(moves[2]['type'])]}{pokemonTypes[int(moves[2]['type'])]}{pokemonEmojiTypes[int(moves[2]['type'])]}**\n"
         f"{moves[2]['description']}\n\n"
         
-        f"4. **{moves[3]['name']}** - {pokemonTypes[int(moves[3]['type'])]} - Power: {moves[3]['power']} - Accuracy: {moves[3]['accuracy']} - PP: {moves[3]['pp']}\n"
+        f"4. **{moves[3]['name']}** - Power: {moves[3]['power']} - Accuracy: {moves[3]['accuracy']} - PP: {moves[3]['pp']}\n"
+        f"**{pokemonEmojiTypes[int(moves[3]['type'])]}{pokemonTypes[int(moves[3]['type'])]}{pokemonEmojiTypes[int(moves[3]['type'])]}**\n"
         f"{moves[3]['description']}\n\n"
     )
 
