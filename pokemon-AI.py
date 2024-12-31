@@ -5,6 +5,7 @@ import json
 import matplotlib.pyplot as plt
 import io
 from math import pi
+import typing
 
 
 prompt = """You are a pokedex in the real-life. What it means is that I will send you photos from real-life that can be not related to pokemon. 
@@ -140,9 +141,9 @@ async def on_ready():
 
 
 @bot.command()
-async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
+async def pokemon(ctx: commands.Context, attachment: typing.Optional[discord.Attachment]):
     if attachment is None:
-        await ctx.send("Please attach an image of your 'Pokemon'.")
+        await ctx.send("Oops! It looks like you forgot to attach an image. Please send me a picture of your 'Pokemon' so I can analyze it!")
         return
 
     result = await attachment.read()
@@ -239,6 +240,19 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
     # Send the chart as an image attachment
     file = discord.File(buf, filename='pokemon_stats.png')
     await ctx.send(file=file)
+
+
+@bot.command(name="pokemon-help")
+async def help(ctx: commands.Context):
+    formatted_response = (
+        f"## /pokemon\n"
+        f"Analyze the photo you send and generate a Pokémon profile.\n"
+        f"**Usage:** `/pokemon [attachment]`\n"
+    )
+
+    await ctx.send(formatted_response)
+
+
 
 bot.run("MTMyMzQ2MjkyMzM1NTY4NDkzNA.GkWJIw.sQwgS2mC-pigD2V1__HDBS7opa38A5S3qMlPOI")
 
