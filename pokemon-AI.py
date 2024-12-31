@@ -140,44 +140,20 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
     types = json_response["type"]
     moves = json_response["move"]
 
+
     formatted_response = (
         f"# {name}\n"
-
-        f"{description}\n"
-
-        f"# Species:\n"
-        f"{species}\n"
-
-        f"# Stats:\n"
-
-        f"### Weight:\n"
-        f"{weight} kg\n"
-
-        f"### Height:\n"
-        f"{height} cm\n"
-
-        f"### HP:\n"
-        f"{hp}\n"
-
-        f"### Attack:\n"
-        f"{attack}\n"
-
-        f"### Defense:\n"
-        f"{defense}\n"
-
-        f"### Special Attack:\n"
-        f"{special_attack}\n"
-
-        f"### Special Defense:\n"
-        f"{special_defense}\n"
-
-        f"### Speed:\n"
-        f"{speed}\n"
-        
-
-        f"# Types:\n"
-        f"{', '.join(pokemonTypes[int(t)] for t in types)}\n\n"
-
+        f"{description}\n\n"
+        f"**Species:** {species}\n"
+        f"**Weight:** {weight} kg\n"
+        f"**Height:** {height} cm\n"
+        f"**HP:** {hp}\n"
+        f"**Attack:** {attack}\n"
+        f"**Defense:** {defense}\n"
+        f"**Special Attack:** {special_attack}\n"
+        f"**Special Defense:** {special_defense}\n"
+        f"**Speed:** {speed}\n"
+        f"**Types:** {', '.join(pokemonTypes[int(t)] for t in types)}\n"
     )
 
     await ctx.send(formatted_response)
