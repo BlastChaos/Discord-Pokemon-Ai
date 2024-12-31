@@ -73,9 +73,11 @@ Move {
   type: Type
   power: number
   accuracy: number
+  description: string
   pp: number
 }
-for the moves, you can only have 4 of them. You can choose moved already existing in the game or create new ones. However, it must make sense with the description you give me.
+for the moves, you can only have 4 of them. 
+You can choose moves that are already existing in the game or create new ones. Ideally, unless it's literally a pokemon from the game, you should create AT LEAST a "Signature move"  However, it must make sense with the description you gave me.
 """
 pokemonTypes = {
     0: "Normal",
@@ -123,7 +125,7 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
         return
 
     result = await attachment.read()
-    await ctx.send("Processing the 'pokemon'...")
+    await ctx.send("Analyzing your image to generate a Pokémon profile. Please wait...")
 
     response = model.generate_content([prompt, {"data": result, "mime_type": attachment.content_type}])
 
@@ -157,6 +159,20 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
         f"**Special Defense:** {special_defense}\n"
         f"**Speed:** {speed}\n"
         f"**Types:** {', '.join(pokemonTypes[int(t)] for t in types)}\n"
+
+        f"## Moves\n"
+        f"1. **{moves[0]['name']}** - {pokemonTypes[int(moves[0]['type'])]} - Power: {moves[0]['power']} - Accuracy: {moves[0]['accuracy']} - PP: {moves[0]['pp']}\n"
+        f"{moves[0]['description']}\n\n"
+        
+        f"2. **{moves[1]['name']}** - {pokemonTypes[int(moves[1]['type'])]} - Power: {moves[1]['power']} - Accuracy: {moves[1]['accuracy']} - PP: {moves[1]['pp']}\n"
+        f"{moves[1]['description']}\n\n"
+
+
+        f"3. **{moves[2]['name']}** - {pokemonTypes[int(moves[2]['type'])]} - Power: {moves[2]['power']} - Accuracy: {moves[2]['accuracy']} - PP: {moves[2]['pp']}\n"
+        f"{moves[2]['description']}\n\n"
+        
+        f"4. **{moves[3]['name']}** - {pokemonTypes[int(moves[3]['type'])]} - Power: {moves[3]['power']} - Accuracy: {moves[3]['accuracy']} - PP: {moves[3]['pp']}\n"
+        f"{moves[3]['description']}\n\n"
     )
 
     await ctx.send(formatted_response)
