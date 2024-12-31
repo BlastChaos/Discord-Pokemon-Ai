@@ -2,7 +2,9 @@ import discord
 from discord.ext import commands
 import google.generativeai as genai
 import json
-
+import matplotlib.pyplot as plt
+import io
+from math import pi
 
 
 prompt = """You are a pokedex in the real-life. What it means is that I will send you photos from real-life that can be not related to pokemon. 
@@ -38,6 +40,7 @@ You must return a JSON. the result must be like this:
     type: Type[]
     move: Move[]
 }
+the stats (except the weight and the height) are in the range of 0 to 200
 the weight is in kg
 the height is in cm
 
@@ -125,7 +128,7 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
     response = model.generate_content([prompt, {"data": result, "mime_type": attachment.content_type}])
 
     json_response = json.loads(response.text)
-
+    print(json_response)
     name = json_response["name"]
     description = json_response["description"]
     species = json_response["species"]
@@ -157,6 +160,45 @@ async def pokemon(ctx: commands.Context, attachment: discord.Attachment):
     )
 
     await ctx.send(formatted_response)
+
+  # Create a spider chart
+    labels = ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed']
+    stats = [hp, attack, defense, special_attack, special_defense, speed]
+
+    # Number of variables
+    num_vars = len(labels)
+
+    # Compute angle of each axis
+    angles = [n / float(num_vars) * 2 * pi for n in range(num_vars)]
+    angles += angles[:1]  # Make sure the plot closes
+
+    # Create the radar chart
+    fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+
+    # Draw one axis per variable and add labels
+    plt.xticks(angles[:-1], labels, color='black', size=10)  # Change label color and size
+
+    # Draw ylabels
+    ax.set_rlabel_position(0)
+    plt.yticks([40, 80, 120, 160, 200], ["40", "80", "120", "160", "200"], color="grey", size=7)
+    plt.ylim(0, 200)  # Define the limit for y-axis
+
+    # Plot data
+    stats += stats[:1]  # Close the loop by repeating the first value
+    ax.plot(angles, stats, linewidth=3, linestyle='solid', color='orange')  # Thicker line with color
+
+    # Fill the area under the plot with a gradient-like effect
+    ax.fill(angles, stats, 'orange', alpha=0.4)  # Transparent orange fill
+
+    # Save the chart to a BytesIO object
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight')
+    buf.seek(0)
+    plt.close()
+
+    # Send the chart as an image attachment
+    file = discord.File(buf, filename='pokemon_stats.png')
+    await ctx.send(file=file)
 
 bot.run("MTMyMzQ2MjkyMzM1NTY4NDkzNA.GkWJIw.sQwgS2mC-pigD2V1__HDBS7opa38A5S3qMlPOI")
 
