@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  pokemon-ai:
+    build: .
+    container_name: pokemon-ai
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DISCORD_TOKEN={your discord token}
+      - GOOGLE_API_KEY={your google gemini api key}
+    command: python pokemon-AI.py
