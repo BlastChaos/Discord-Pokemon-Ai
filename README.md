@@ -2,7 +2,7 @@
 
 This is a bot for discord. His puropose is to create a real life pokedex entry based on the photos you provided
 
-![Demo](demo.mp4)
+![demo](demo.gif)
 
 # Getting Started
 
