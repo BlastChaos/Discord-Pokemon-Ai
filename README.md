@@ -1,14 +1,15 @@
 # What is it?
 
-This is a bot for discord. His puropose is to create a real life pokedex entry based on the photos you provided
+This is a bot for Discord. Its purpose is to create a real-life Pokédex entry based on the photos you provide.
 
 ![demo](demo.gif)
 
 # Getting Started
 
-This project is built in python. **You** also need docker to test the application
+This project is built in Python. You also need Docker to test the application.
 
-1. Clone the repos
-2. Rename **docker-compose.template.yml** to **docker-compose.yml** and change these environnemnts variables
-   - DISCORD_TOKEN: Your discord token. You need this to use this bot in discord. For more info about how to create a discord token, you can see [this article.](https://www.writebots.com/discord-bot-token/).
-   - GOOGLE_API_KEY: Your google gemini api key. You need this to generate the entry based on your photo. For more info about how to create a gemini api key, you can see [this article.](https://ai.google.dev/gemini-api/docs/api-key#windows)
+1. Clone the repository.
+2. Rename **docker-compose.template.yml** to **docker-compose.yml** and change these environment variables:
+   - DISCORD_TOKEN: Your Discord token. You need this to use this bot in Discord. For more info about how to create a Discord token, you can see [this article.](https://www.writebots.com/discord-bot-token/).
+   - GOOGLE_API_KEY: Your Google Gemini API key. You need this to generate the entry based on your photo. For more info about how to create a Gemini API key, you can see [this article.](https://ai.google.dev/gemini-api/docs/api-key#windows)
+3. You are ready to test on your own!
